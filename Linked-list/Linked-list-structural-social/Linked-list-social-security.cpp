@@ -98,6 +98,19 @@ using namespace std;
         }
     }
 
+    void brisanje(maticni *glava, int broj){
+        maticni *prethodni = glava;
+        maticni *tekuci = glava->sljedeci;
+        while(tekuci){
+            if(tekuci->mat_br == broj){
+                prethodni->sljedeci=tekuci->sljedeci;
+                delete tekuci;
+            }
+            prethodni=tekuci;
+            tekuci=tekuci->sljedeci;
+        }
+    }
+
 int main(){
     int biranje;
     maticni *glava = new maticni;
@@ -137,6 +150,10 @@ int main(){
             azuriranje(glava, element, broj);
                 break;
             case 5:
+            int brojcek;
+            cout << "Unesite maticni broj osobe za brisanje: ";
+            cin >> brojcek;
+            brisanje(glava, brojcek);
                 break;
             case 9:
             cout << "Kraj programa!" << endl;
