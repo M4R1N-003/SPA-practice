@@ -44,6 +44,24 @@ using namespace std;
         }
     }
 
+    void pretrazivanje(maticni *glava, int broj){
+        maticni *tekuci = glava->sljedeci;
+        while(tekuci){
+            if(tekuci->mat_br == broj){
+                cout << "Maticni broj osobe: ";
+                cout << tekuci->mat_br << endl;
+                cout << "Ime i prezime osobe: ";
+                cout << tekuci->ime_prez << endl;
+                cout << "Starost osobe: ";
+                cout << tekuci->starost << endl;
+                cout << "Spol osobe: ";
+                cout << tekuci->spol << endl;
+                cout << endl;
+            }
+            tekuci = tekuci->sljedeci; 
+        }
+    }
+
 int main(){
     int biranje;
     maticni *glava = new maticni;
@@ -66,6 +84,10 @@ int main(){
             ispis(glava);
                 break;
             case 3:
+            int mat;
+            cout << "Unesite maticni broj za pretrazivanje osobe: ";
+            cin >> mat;
+            pretrazivanje(glava, mat);
                 break;
             case 4:
                 break;
