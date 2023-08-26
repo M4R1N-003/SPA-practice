@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstring>
 using namespace std;
 
     struct maticni{
@@ -62,6 +63,41 @@ using namespace std;
         }
     }
 
+    void azuriranje(maticni *glava, char element[30], int broj){
+        maticni *tekuci = glava->sljedeci;
+        while(tekuci){
+            if(tekuci->mat_br == broj){
+                if(strcmp(element, "Maticni_broj")==0){
+                    int num;
+                    cout << "Unesite novi maticni broj: ";
+                    cin >>num;
+                    tekuci->mat_br = num;
+                }
+                if(strcmp(element, "Ime_prezime")==0){
+                    char ime[100];
+                    cin.ignore();
+                    cout << "Unesite novo ime: ";
+                    cin.getline(ime, 100);
+                    strcpy(tekuci->ime_prez, ime);
+                }
+                if(strcmp(element,"Starost")==0){
+                    int number;
+                    cout << "Unesite novu starost: ";
+                    cin >>number;
+                    tekuci->starost = number;
+                }
+                if(strcmp(element, "Spol")==0){
+                    char spol[6];
+                    cin.ignore();
+                    cout << "Unesite novi spol: ";
+                    cin.getline(spol, 6);
+                    strcpy(tekuci->spol, spol);
+                }
+            }
+            tekuci = tekuci->sljedeci; 
+        }
+    }
+
 int main(){
     int biranje;
     maticni *glava = new maticni;
@@ -90,6 +126,15 @@ int main(){
             pretrazivanje(glava, mat);
                 break;
             case 4:
+            char element[30];
+            int broj;
+            cout << "Za azuriranje morate ukucati element koji zelite promjeniti!" << endl;
+            cout << "Moguce promjene su: Maticni_broj, Ime_prezime, Starost, Spol!" << endl;
+            cout << "Unesite maticni broj osobe kojoj zelite promjeniti element: ";
+            cin >> broj;
+            cout << "Unesite element koji zelite azurirati: ";
+            cin >> element;
+            azuriranje(glava, element, broj);
                 break;
             case 5:
                 break;
