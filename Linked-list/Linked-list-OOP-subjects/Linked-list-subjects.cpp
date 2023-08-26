@@ -33,6 +33,18 @@ using namespace std;
             cout << "Unesite ime profesora: ";
             cin.getline(novi->ime_prof, 100);
         }
+
+        void ispis(){
+            kolegij *tekuci = this->sljedeci;
+            while(tekuci){
+                cout << "Sifra kolegija je: " << tekuci->sif_kolegij << endl;
+                cout << "Ime kolegija je: " << tekuci->ime_kolegija << endl;
+                cout << "Broj ECTS bodova je: " << tekuci->ECTS << endl;
+                cout << "Ime profesora je: " << tekuci->ime_prof << endl;
+                cout << endl;
+                tekuci = tekuci->sljedeci;
+            }
+        }
     };
 
     kolegij *objekt = new kolegij;
@@ -53,6 +65,7 @@ int main(){
             objekt->dodavanje();
                 break;
             case 2:
+            objekt->ispis();
                 break;
             case 3:
                 break;
