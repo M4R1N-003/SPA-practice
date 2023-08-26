@@ -13,6 +13,26 @@ using namespace std;
         kolegij(){
             sljedeci = NULL;
         }
+
+        void dodavanje(){
+            kolegij *novi;
+            kolegij *zadnji = this;
+            while(zadnji->sljedeci)
+                zadnji = zadnji->sljedeci;
+            novi = new kolegij;
+            zadnji->sljedeci = novi;
+            novi->sljedeci = NULL;
+            cout << "Unesite sifru kolegija: ";
+            cin >> novi->sif_kolegij;
+            cin.ignore();
+            cout << "Unesite ime kolegija: ";
+            cin.getline(novi->ime_kolegija, 100);
+            cout << "Unesite broj ECTS bodova za kolegij: ";
+            cin >> novi->ECTS;
+            cin.ignore();
+            cout << "Unesite ime profesora: ";
+            cin.getline(novi->ime_prof, 100);
+        }
     };
 
     kolegij *objekt = new kolegij;
@@ -30,6 +50,7 @@ int main(){
         cin >> biranje;
         switch(biranje){
             case 1:
+            objekt->dodavanje();
                 break;
             case 2:
                 break;
