@@ -45,6 +45,21 @@ using namespace std;
                 tekuci = tekuci->sljedeci;
             }
         }
+
+        void pretrazivanje(int broj){
+            kolegij *tekuci = this->sljedeci;
+            while(tekuci){
+                if(tekuci->sif_kolegij==broj){
+                    cout << "Sifra kolegija je: " << tekuci->sif_kolegij << endl;
+                    cout << "Ime kolegija je: " << tekuci->ime_kolegija << endl;
+                    cout << "Broj ECTS bodova je: " << tekuci->ECTS << endl;
+                    cout << "Ime profesora je: " << tekuci->ime_prof << endl;
+                    cout << endl;
+                }
+                tekuci = tekuci->sljedeci;
+            }
+        }
+        
     };
 
     kolegij *objekt = new kolegij;
@@ -68,6 +83,10 @@ int main(){
             objekt->ispis();
                 break;
             case 3:
+            int brojcek;
+            cout << "Unesite sifru predmeta za pretrazivanje: ";
+            cin >> brojcek;
+            objekt->pretrazivanje(brojcek);
                 break;
             case 4:
                 break;
