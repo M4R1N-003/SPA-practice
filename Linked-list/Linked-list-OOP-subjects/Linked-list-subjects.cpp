@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstring>
 using namespace std;
     class kolegij{
         private:
@@ -12,6 +13,10 @@ using namespace std;
 
         kolegij(){
             sljedeci = NULL;
+        }
+
+        ~kolegij(){
+            cout << "Dealociram!" << endl;
         }
 
         void dodavanje(){
@@ -59,6 +64,67 @@ using namespace std;
                 tekuci = tekuci->sljedeci;
             }
         }
+
+        void azuriranje(int broj){
+            kolegij *tekuci = this->sljedeci;
+            while(tekuci){
+                if(tekuci->sif_kolegij == broj){
+                    int brojic;
+                    cout << "1-sifra" << endl;
+                    cout << "2-ime kolegija" << endl;
+                    cout << "3-ECTS" << endl;
+                    cout << "4-ime profesora\n" << endl;
+                    cout << "Koju zelite izbrisati: ";
+                    cin >> brojic;
+                    switch(brojic){
+                        case 1:
+                        int sif;
+                        cout << "Unesite novu sifru: ";
+                        cin >> sif;
+                        tekuci->sif_kolegij = sif;
+                            break;
+                        case 2:
+                        char ime[100];
+                        cin.ignore();
+                        cout << "Unesite novo ime: ";
+                        cin.getline(ime, 100);
+                        strcpy(tekuci->ime_kolegija, ime);
+                            break;
+                        case 3:
+                        int ect;
+                        cout << "Unesite novi broj ectsa: ";
+                        cin >> ect;
+                        tekuci->ECTS = ect;
+                            break;
+                        case 4:
+                        char imep[100];
+                        cin.ignore();
+                        cout << "Unesite novo ime: ";
+                        cin.getline(imep, 100);
+                        strcpy(tekuci->ime_prof, imep);
+                            break;
+                        default:
+                        cout << "Nema te mogucnosti!" << endl;
+                            break;
+                    }
+                }
+            tekuci = tekuci->sljedeci;
+            }
+        }
+
+        void brisanje(int broj){
+            kolegij *prethodni = this;
+            kolegij *tekuci = this->sljedeci;
+            while(tekuci){
+                if(tekuci->sif_kolegij == broj){
+                    prethodni->sljedeci = tekuci->sljedeci;
+                    delete tekuci;
+                    return;
+                }
+                prethodni = tekuci;
+                tekuci = tekuci->sljedeci;
+            }
+        }
         
     };
 
@@ -72,6 +138,7 @@ int main(){
         cout << "3-pretrazivanje elemenata!" << endl;
         cout << "4-azuriranje elemenata!" << endl;
         cout << "5-brisanje elemenata!" << endl;
+        cout << "9-kraj programa!" << endl;
         cout << endl;
         cout << "Unesite odabir: ";
         cin >> biranje;
@@ -89,11 +156,20 @@ int main(){
             objekt->pretrazivanje(brojcek);
                 break;
             case 4:
+            int brojic;
+            cout << "Unesite sifru predmeta kojeg zelite azurirati: ";
+            cin >> brojic;
+            objekt->azuriranje(brojic);
                 break;
             case 5:
+            int brojcekic;
+            cout << "Unesite sifru predmeta kojeg zelite obrisati: ";
+            cin >> brojcekic;
+            objekt->brisanje(brojcekic);
                 break;
             case 9:
             cout << "Kraj programa!" << endl;
+            delete objekt;
                 break;
             default:
             cout << "Unesite ponovno!" << endl;
