@@ -77,6 +77,38 @@ void pretrazivanje(binarno *korijen, int broj1){
     }
 }
 
+void brisanje1(binarno *cvor, binarno *roditelj, bool lijevi){
+    if(cvor==NULL) return;
+    if(lijevi){
+        roditelj->lijevi=NULL;
+    }
+    else {roditelj->desni=NULL;}
+    
+    brisanje1(cvor->desni, cvor, false);
+    brisanje1(cvor->lijevi, cvor, true);
+
+    cout << "Brisem cvor: " << cvor->broj << " ---> " << cvor->ime << endl;
+    delete cvor;
+}
+
+void brisanje2(binarno *korijen, int broj2){
+    if(korijen==NULL) return;
+    else if(korijen->desni->broj==broj2){
+        brisanje1(korijen->desni, korijen, false);
+        return;
+    }
+    else if(korijen->lijevi->broj==broj2){
+        brisanje1(korijen->lijevi, korijen, true);
+        return;
+    }
+    else if(korijen->broj<broj2) {
+        brisanje2(korijen->desni, broj2);
+    }
+    else if(korijen->broj>broj2){
+        brisanje2(korijen->lijevi, broj2);
+    }
+}
+
 int main(){
     int biranje;
     binarno *korijen = new binarno;
@@ -113,6 +145,10 @@ int main(){
             pretrazivanje(korijen, brojic2);
                 break;
             case 4:
+            int brojic3;
+            cout << "Unesite broj za brisanje cvora: ";
+            cin >> brojic3;
+            brisanje2(korijen, brojic3);
                 break;
             case 9:
             cout << "Kraj programa!" << endl;
