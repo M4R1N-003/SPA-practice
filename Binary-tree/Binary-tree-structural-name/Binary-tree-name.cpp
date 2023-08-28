@@ -61,6 +61,22 @@ void ispis(binarno *korijen){
     }
 }
 
+void pretrazivanje(binarno *korijen, int broj1){
+    if(korijen == NULL){
+        return;
+    }
+    if(korijen->broj == broj1){
+        cout << korijen->broj << " ---> " << korijen->ime << endl;
+        return;
+    }
+    if(korijen->broj < broj1){
+        pretrazivanje(korijen->desni, broj1);
+    }
+    else{
+        pretrazivanje(korijen->lijevi, broj1);
+    }
+}
+
 int main(){
     int biranje;
     binarno *korijen = new binarno;
@@ -91,6 +107,10 @@ int main(){
             ispis(korijen);
                 break;
             case 3:
+            int brojic2;
+            cout << "Unesite broj za pretrazivanje binarnog stabla: ";
+            cin >> brojic2;
+            pretrazivanje(korijen, brojic2);
                 break;
             case 4:
                 break;
