@@ -65,6 +65,24 @@ class binarno{
         }
     }
 
+    void pretrazivanje(binarno *cvor, int brojic){
+        if(cvor==NULL){
+            cout << "Binarno stablo ne postoji!" << endl;
+            return;
+        }
+        else if(cvor->broj==brojic){
+            cout << "Broj je: " << cvor->broj << endl;
+            cout << "Predmet je: " << cvor->predmet << endl;
+            return;
+        }
+        else if(cvor->broj<brojic){
+            pretrazivanje(cvor->desni, brojic);
+        }
+        else{
+            pretrazivanje(cvor->lijevi, brojic);
+        }
+    }
+
 };
 
 binarno *objekt = new binarno;
@@ -84,21 +102,25 @@ int main(){
             case 1:
             int broj1;
             char predmet[100];
-            /*cout << "Unesite broj elementa: ";
+            cout << "Unesite broj elementa: ";
             cin >> broj1;
             cin.ignore();
             cout << "Unesite ime predmeta: ";
-            cin.getline(predmet, 100);*/
-            for(int i=-100;i<100;i++){
-                broj1=i;
-                strcpy(predmet, "Marin");
+            cin.getline(predmet, 100);
+            //for(int i=-100;i<100;i++){
+            //    broj1=i;
+            //    strcpy(predmet, "Marin");
             objekt->dodavanje(broj1, predmet);
-            }
+            //}
                 break;
             case 2:
             objekt->ispis(objekt);
                 break;
             case 3:
+            int broj2;
+            cout << "Unesite broj za pretrazivanje stabla: ";
+            cin >> broj2;
+            objekt->pretrazivanje(objekt, broj2);
                 break;
             case 4:
                 break;
