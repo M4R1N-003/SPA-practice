@@ -60,5 +60,53 @@ class lista{
             }
         }
     }
+
+    void ispisListe(int broj3){
+        lista *zadnji=this;
+        for(int i=0;i<broj3;i++){
+            zadnji=zadnji->glSljedeci;
+            if(i==broj3-1){
+                lista *prvi=zadnji->sljedeci;
+                while(prvi){
+                    printf("%d\n", prvi->broj);
+                    printf("%s\n", prvi->ime);
+                    printf("%d\n", prvi->godine);
+                    prvi=prvi->sljedeci; 
+                }   
+            }
+        }
+    }
+
+    void pretrazivanje(int broj4){
+        lista *zadnji=this;
+        for(int i=0;i<broj2;i++){
+            zadnji=zadnji->glSljedeci;
+            lista *prvi=zadnji->sljedeci;
+            while(prvi){
+                if(prvi->broj==broj4){
+                    printf("%d\n", prvi->broj);
+                    printf("%s\n", prvi->ime);
+                    printf("%d\n", prvi->godine);
+                }
+                prvi=prvi->sljedeci;
+            }
+        }
+    }
+
+    void brisanje(int broj4){
+        lista *zadnji=this;
+        for(int i=0;i<broj2;i++){
+            zadnji=zadnji->glSljedeci;
+            lista *prvi=zadnji->sljedeci;
+            lista *predzadnji=zadnji;
+            while(prvi){
+                if(prvi->broj==broj4){
+                    predzadnji->sljedeci=prvi->sljedeci;  
+                }
+                predzadnji=prvi;
+                prvi=prvi->sljedeci;
+            }
+        }
+    }
 };
 #endif

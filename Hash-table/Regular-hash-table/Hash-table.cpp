@@ -7,9 +7,14 @@ int main(){
     lista *objekt= new lista;
     int biranje;
     do{
+        cout << endl;
         cout << "1-unos liste!" << endl;
         cout << "2-unos elementa!" << endl;
         cout << "3-ispis" << endl;
+        cout << "4-ispis specificne liste!" << endl;
+        cout << "5-pretraga za posebnim elementom!" << endl;
+        cout << "6-brisanje posebnog elementa!" << endl;
+        cout << endl;
         cout << "Unesite odabir: ";
         cin >> biranje;
         switch(biranje){
@@ -34,13 +39,25 @@ int main(){
                 objekt->dodavanjeElementa(unesi, broj, ime, god);
                 break;
             case 3:
-            objekt->ispis();
+                objekt->ispis();
                 break;
             case 4:
+                int broj5;
+                cout << "Unesite broj liste za ispis: ";
+                cin >> broj5;
+                objekt->ispisListe(broj5);
                 break;
             case 5:
+                int broj6;
+                cout << "Unesite broj elementa za pretrazivanje: ";
+                cin >> broj6;
+                objekt->pretrazivanje(broj6);
                 break;
             case 6:
+                int broj7;
+                cout << "Unesite broj elementa za brisanje: ";
+                cin >> broj7;
+                objekt->brisanje(broj7);
                 break;
             case 9:
                 cout << "Kraj programa!" << endl;
