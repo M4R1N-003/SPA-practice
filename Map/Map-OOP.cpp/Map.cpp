@@ -27,6 +27,15 @@ using namespace std;
                 cout << (*i).first << "---" << (*i).second << endl;
             }
         }
+
+        void brisanje(int broj){
+            for(map <int, string>::iterator i=mojaMapa.begin(); i!=mojaMapa.end();){
+                if(i->first==broj){
+                    i=mojaMapa.erase(i);
+                }
+                else ++i;
+            }
+        }
     };
 int main(){
     int biranje;
@@ -54,6 +63,10 @@ int main(){
                 objekt->pretrazivanje(brojcek);
                 break;
             case 4:
+                int k;
+                cout << "Unesite broj za brisanje: ";
+                cin >> k;
+                objekt->brisanje(k);
                 break;
             case 9:
                 cout << "Kraj programa!" << endl;
