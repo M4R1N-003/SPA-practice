@@ -16,6 +16,10 @@ using namespace std;
                 mojaMapa.insert(pair <int, string>(N, ime));
         }
         
+        void ispis(){
+            for(map <int, string>::iterator i=mojaMapa.begin(); i!=mojaMapa.end();++i)
+                cout << (*i).first << "---" << (*i).second << endl;
+        }
     };
 int main(){
     int biranje;
@@ -34,6 +38,7 @@ int main(){
                 objekt->dodaj();
                 break;
             case 2:
+                objekt->ispis();
                 break;
             case 3:
                 break;
