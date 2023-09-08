@@ -20,6 +20,13 @@ using namespace std;
             for(map <int, string>::iterator i=mojaMapa.begin(); i!=mojaMapa.end();++i)
                 cout << (*i).first << "---" << (*i).second << endl;
         }
+
+        void pretrazivanje(int broj){
+            for(map <int, string>::iterator i=mojaMapa.begin(); i!=mojaMapa.end();++i){
+                if((*i).first==broj)
+                cout << (*i).first << "---" << (*i).second << endl;
+            }
+        }
     };
 int main(){
     int biranje;
@@ -41,6 +48,10 @@ int main(){
                 objekt->ispis();
                 break;
             case 3:
+                int brojcek;
+                cout << "Unesite broj za pretrazivanje: ";
+                cin >> brojcek;
+                objekt->pretrazivanje(brojcek);
                 break;
             case 4:
                 break;
