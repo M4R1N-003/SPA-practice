@@ -31,6 +31,17 @@ class vektor{
         }
     }
 
+    void brisanje(int brojcek) {
+        auto it = vek.begin();
+        while (it != vek.end()) {
+            if (it->broj == brojcek) {
+                it = vek.erase(it);
+            } else {
+                ++it;
+            }
+        }
+    }
+
 };
 
 int main(){
@@ -59,6 +70,10 @@ int main(){
                 objekt->pretrazivanje(brojcek);
                 break;
             case 4:
+                int brojcek1;
+                cout << "Unesite broj za brisanje: ";
+                cin >> brojcek1;
+                objekt->brisanje(brojcek1);
                 break;
             case 9:
                 cout << "Kraj programa!" << endl;
