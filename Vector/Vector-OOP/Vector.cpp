@@ -7,6 +7,7 @@ class vektor{
     int broj;
     char ime[100];
     vector <vektor> vek;
+
     void dodavanje(){
         vektor priv;
         cout << "Unesite broj: ";
@@ -14,6 +15,20 @@ class vektor{
         cout << "Unesite ime: ";
         cin >> priv.ime;
         vek.push_back(priv);
+    }
+
+    void ispis() {
+        for (const auto& item : vek) {
+            cout << "Broj: " << item.broj << ", Ime: " << item.ime << endl;
+        }
+    }
+
+    void pretrazivanje(int brojcek){
+        for (const auto& item : vek) {
+            if(item.broj==brojcek){
+                cout << "Broj: " << item.broj << ", Ime: " << item.ime << endl;
+            }
+        }
     }
 
 };
@@ -35,8 +50,13 @@ int main(){
                 objekt->dodavanje();
                 break;
             case 2:
+                objekt->ispis();
                 break;
             case 3:
+                int brojcek;
+                cout << "Unesite broj za pretrazivanje: ";
+                cin >> brojcek;
+                objekt->pretrazivanje(brojcek);
                 break;
             case 4:
                 break;
