@@ -44,16 +44,63 @@ using namespace std;
             zadnji=zadnji->glSljedeci;
             lista *prvi=zadnji->sljedeci;
             while(prvi){
-                printf("%d\n", prvi->broj);
-                printf("%s\n", prvi->ime);
-                printf("%d\n", prvi->godine);
+                cout << prvi->broj << endl;
+                cout << prvi->ime << endl;
+                cout << prvi->godine << endl;
+                prvi=prvi->sljedeci;
+            }
+        }
+    }
+
+    void ispisListe(int broj3, lista *glava){
+        lista *zadnji=glava;
+        for(int i=0;i<broj3;i++){
+            zadnji=zadnji->glSljedeci;
+            if(i==broj3-1){
+                lista *prvi=zadnji->sljedeci;
+                while(prvi){
+                    cout << prvi->broj << endl;
+                    cout << prvi->ime << endl;
+                    cout << prvi->godine << endl;
+                    prvi=prvi->sljedeci; 
+                }   
+            }
+        }
+    }
+
+    void pretrazivanje(int broj4, lista *glava){
+        lista *zadnji=glava;
+        for(int i=0;i<broj2;i++){
+            zadnji=zadnji->glSljedeci;
+            lista *prvi=zadnji->sljedeci;
+            while(prvi){
+                if(prvi->broj==broj4){
+                    cout << prvi->broj << endl;
+                    cout << prvi->ime << endl;
+                    cout << prvi->godine << endl;
+                }
+                prvi=prvi->sljedeci;
+            }
+        }
+    }
+
+    void brisanje(int broj4, lista *glava){
+        lista *zadnji=glava;
+        for(int i=0;i<broj2;i++){
+            zadnji=zadnji->glSljedeci;
+            lista *prvi=zadnji->sljedeci;
+            lista *predzadnji=zadnji;
+            while(prvi){
+                if(prvi->broj==broj4){
+                    predzadnji->sljedeci=prvi->sljedeci;  
+                }
+                predzadnji=prvi;
                 prvi=prvi->sljedeci;
             }
         }
     }
 
     
-
 int main(){
     int biranje;
     lista *glava = new lista;
@@ -95,10 +142,22 @@ int main(){
                 ispis(glava);
                 break;
             case 4:
+                int broj5;
+                cout << "Unesite broj liste za ispis: ";
+                cin >> broj5;
+                ispisListe(broj5, glava);
                 break;
             case 5:
+                int broj6;
+                cout << "Unesite broj elementa za pretrazivanje: ";
+                cin >> broj6;
+                pretrazivanje(broj6, glava);
                 break;
             case 6:
+                int broj7;
+                cout << "Unesite broj elementa za brisanje: ";
+                cin >> broj7;
+                brisanje(broj7, glava);
                 break;
             case 9:
                 cout << "Kraj programa!" << endl;
