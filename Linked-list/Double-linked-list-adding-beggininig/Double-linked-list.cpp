@@ -27,6 +27,17 @@ class lista{
         cin >> novi->ime;
     }
 
+    void ispis(){
+        lista  *tekuci = this->sljedeci;
+        while(tekuci){
+            cout << "Broj elementa je: ";
+            cout << tekuci->broj << endl;
+            cout << "Ime elementa je: ";
+            cout << tekuci->ime << endl;
+            tekuci=tekuci->sljedeci;
+        }
+    }
+
 };
 int main(){
     int biranje;
@@ -48,7 +59,7 @@ int main(){
             case 2:
                 break;
             case 3:
-                //objekt->ispis();
+                objekt->ispis();
                 break;
             case 4:
                 break;
