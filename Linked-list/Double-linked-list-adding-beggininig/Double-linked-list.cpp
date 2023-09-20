@@ -64,6 +64,42 @@ class lista{
         }
     }
 
+    void pretrazivanje(int brojcic){
+        lista  *tekuci = this->sljedeci;
+        while(tekuci){
+            if(tekuci->broj == brojcic){
+                cout << "Broj elementa je: ";
+                cout << tekuci->broj << endl;
+                cout << "Ime elementa je: ";
+                cout << tekuci->ime << endl; 
+            }
+            tekuci=tekuci->sljedeci;
+        }
+    }
+
+    void brisanje(int brojcic){
+        lista *tekuci = this->sljedeci;
+        lista *prosli = this;
+        while(tekuci){
+            if(tekuci->broj == brojcic){
+                if(tekuci->sljedeci==NULL){
+                    prosli->sljedeci=tekuci->sljedeci;
+                    delete tekuci;
+                    return;
+                }
+                else{
+                    lista *iduci = tekuci->sljedeci;
+                    iduci->prethodni = prosli;
+                    prosli->sljedeci=tekuci->sljedeci;
+                    delete tekuci;
+                    return;
+                }
+            }
+            prosli=tekuci;
+            tekuci=tekuci->sljedeci;
+        }
+    }
+
 };
 int main(){
     int biranje;
@@ -89,8 +125,16 @@ int main(){
                 objekt->ispis();
                 break;
             case 4:
+                int br;
+                cout << "Unesi broj za pretrazivanje: ";
+                cin >> br;
+                objekt->pretrazivanje(br);
                 break;
             case 5:
+                int kr;
+                cout << "Unesite broj za brisanje: ";
+                cin >> kr;
+                objekt->brisanje(kr);
                 break;
         }
     }while(biranje!=9);

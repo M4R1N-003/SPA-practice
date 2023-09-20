@@ -31,16 +31,31 @@ class lista{
     }
     
     void dodajPocetak(){
-        lista *novi, *iduci = this->sljedeci;
-        novi = new lista;
-        this->sljedeci=novi;
-        novi->sljedeci=iduci;
-        iduci->prethodni=novi;
-        cout << "Unesi broj elementa: ";
-        cin >> novi->broj;
-        cin.ignore();
-        cout << "Unesite ime: ";
-        cin.getline(novi->ime, 100);
+        lista *novi, *zadnji=this;
+        if(zadnji->sljedeci==NULL){
+            novi = new lista;
+            zadnji->sljedeci=novi;
+            novi->prethodni = zadnji;
+            novi->sljedeci=NULL;
+            cout << "Unesite broj elementa: ";
+            cin >> novi->broj;
+            cin.ignore();
+            cout << "Unesite ime elementa: ";
+            cin.getline(novi->ime, 100);
+        }
+        else{
+            lista *iduci=zadnji->sljedeci;
+            novi = new lista;
+            zadnji->sljedeci = novi;
+            iduci->prethodni = novi;
+            novi->prethodni = zadnji;
+            novi->sljedeci = iduci;
+            cout << "Unesite broj elementa: ";
+            cin >> novi->broj;
+            cin.ignore();
+            cout << "Unesite ime elementa: ";
+            cin.getline(novi->ime, 100);
+        }
     }
     
     void ispis(){
