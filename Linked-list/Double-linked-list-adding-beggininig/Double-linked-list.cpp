@@ -19,12 +19,38 @@ class lista{
             zadnji=zadnji->sljedeci;
         novi = new lista;
         zadnji->sljedeci=novi;
-        zadnji=novi->prethodni;
+        novi->prethodni=zadnji;
         novi->sljedeci=NULL;
         cout << "Unesite broj elementa: ";
         cin >> novi->broj;
         cout << "Unesite ime elementa: ";
         cin >> novi->ime;
+    }
+
+    void dodavanjePocetak(){
+        lista *novi, *zadnji=this;
+        if(zadnji->sljedeci==NULL){
+            novi = new lista;
+            zadnji->sljedeci=novi;
+            novi->prethodni = zadnji;
+            novi->sljedeci=NULL;
+            cout << "Unesite broj elementa: ";
+            cin >> novi->broj;
+            cout << "Unesite ime elementa: ";
+            cin >> novi->ime;
+        }
+        else{
+            lista *iduci=zadnji->sljedeci;
+            novi = new lista;
+            zadnji->sljedeci = novi;
+            iduci->prethodni = novi;
+            novi->prethodni = zadnji;
+            novi->sljedeci = iduci;
+            cout << "Unesite broj elementa: ";
+            cin >> novi->broj;
+            cout << "Unesite ime elementa: ";
+            cin >> novi->ime;
+        }
     }
 
     void ispis(){
@@ -57,6 +83,7 @@ int main(){
                 objekt->dodavanje();
                 break;
             case 2:
+                objekt->dodavanjePocetak();
                 break;
             case 3:
                 objekt->ispis();
