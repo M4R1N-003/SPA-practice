@@ -1,7 +1,24 @@
 #include <iostream>
 using namespace std;
+int N;
+
+int pretrazivanje(int polje[], int lijevo, int desno, int brojcic){
+    while(lijevo<=desno){
+        int sredina = lijevo+(desno-lijevo)/2;
+
+        if(brojcic==polje[sredina]){
+            return polje[sredina];
+        }
+        else if(brojcic>polje[sredina]){
+            lijevo = sredina + 1;
+        }
+        else{
+            desno = sredina - 1;
+        }
+    }
+    return -1;
+}
 int main(){
-    int N;
     cout << "Unesite broj elemenata: ";
     cin >> N;
     int polje[N];
@@ -20,6 +37,14 @@ int main(){
             }
         }
     }
+    
+    int kljuc;
+    cout << "Unesite broj za pretrazivanje: ";
+    cin >> kljuc;
+    int broj = pretrazivanje(polje, 0, N-1, kljuc);
+    cout << "Rezultat pretrage je: ";
+    cout << broj << endl;
+
     
     return 0;
 }
