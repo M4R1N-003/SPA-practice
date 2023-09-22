@@ -1,6 +1,4 @@
 #include <iostream>
-#include <ctime>
-#include <stdlib.h>
 using namespace std;
     class lista{
         private:
@@ -31,18 +29,45 @@ using namespace std;
             }
         }
 
-        
+        void sortiranje(){
+            if(!(this->sljedeci)) return;
+            
+            lista *sortirano = NULL;
+            lista *trenutni = this;
+
+            while(trenutni){
+                lista *iduci = trenutni->sljedeci;
+                if(!sortirano || sortirano->N >= trenutni->N){
+                    trenutni->sljedeci = sortirano;
+                    sortirano = trenutni;
+                }
+                else{
+                    lista *priv = sortirano;
+                    while(priv->sljedeci && priv->sljedeci->N < trenutni->N){
+                        priv = priv->sljedeci;
+                    }
+                    trenutni->sljedeci=priv->sljedeci;
+                    priv->sljedeci = trenutni;
+                }
+                trenutni = iduci;
+            }
+        }
 
     };
 int main(){
     lista *objekt = new lista;
     int n;
+    cout << "Unesi broj brojeva: ";
     cin >> n;
-    srand(time(0));
+    cin.ignore();
+    int s;
     for(int i=0;i<n;i++){
-        int s = rand()%11 + 10;
+        cin >> s;
         objekt->dodavanje(s);
     }
+    objekt->ispis();
+    objekt->sortiranje();
+    cout << endl;
     objekt->ispis();
     return 0;
 }
