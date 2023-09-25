@@ -29,9 +29,42 @@ class lista{
         }
     }
 
+    void brisanje(int k){
+        lista *prethodni = this;
+        lista *tekuci = this->sljedeci;
+        while(tekuci){
+            if(tekuci->N%k==0){
+                if(tekuci->sljedeci==NULL){
+                    delete tekuci;
+                    prethodni->sljedeci=NULL;
+                }
+                else{
+                    prethodni->sljedeci = tekuci->sljedeci;
+                    delete tekuci;
+                    tekuci=prethodni->sljedeci;
+                }
+            }
+            else{
+                prethodni=tekuci;
+                tekuci=tekuci->sljedeci;
+            }
+        }
+    }
 };
+lista *objekt=new lista;
 int main(){
-    
-
+    int n;
+    cout << "Unesite broj elemenata: ";
+    cin >> n;
+    int l;
+    for(int i=0;i<n;i++){
+        cin >> l;
+        objekt->dodaj(l);
+    }
+    int k;
+    cout << "Unesite broj ciji ce se visekratnici izbrisati: ";
+    cin >> k;
+    objekt->brisanje(k);
+    objekt->ispisi();
     return 0;
 }
