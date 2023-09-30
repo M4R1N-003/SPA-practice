@@ -1,4 +1,6 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 
 class lista{
@@ -50,8 +52,83 @@ class lista{
             }
         }
     }
+
+    lista* getTail(lista* current) {
+        while (current != nullptr && current->sljedeci != nullptr) {
+            current = current->sljedeci;
+        }
+        return current;
+    }
+
+    lista* partition(lista* head, lista* end, lista** newHead, lista** newEnd) {
+        lista* pivot = end;
+        lista* prev = nullptr, * cur = head, * tail = pivot;
+
+        while (cur != pivot) {
+            if (cur->N < pivot->N) {
+                if ((*newHead) == nullptr) {
+                    (*newHead) = cur;
+                }
+                prev = cur;
+                cur = cur->sljedeci;
+            }
+            else {
+                if (prev) {
+                    prev->sljedeci = cur->sljedeci;
+                }
+                lista* tmp = cur->sljedeci;
+                cur->sljedeci = nullptr;
+                tail->sljedeci = cur;
+                tail = cur;
+                cur = tmp;
+            }
+        }
+
+        if ((*newHead) == nullptr) {
+            (*newHead) = pivot;
+        }
+
+        (*newEnd) = tail;
+
+        return pivot;
+    }
+
+    lista* quickSortRec(lista* head, lista* end) {
+        if (!head || head == end) {
+            return head;
+        }
+
+        lista* newHead = nullptr, * newEnd = nullptr;
+
+        lista* pivot = partition(head, end, &newHead, &newEnd);
+
+        if (newHead != pivot) {
+            lista* tmp = newHead;
+            while (tmp->sljedeci != pivot) {
+                tmp = tmp->sljedeci;
+            }
+            tmp->sljedeci = nullptr;
+
+            newHead = quickSortRec(newHead, tmp);
+
+            tmp = getTail(newHead);
+            tmp->sljedeci = pivot;
+        }
+
+        pivot->sljedeci = quickSortRec(pivot->sljedeci, newEnd);
+
+        return newHead;
+    }
+
+    void quickSort() {
+        lista* newHead = nullptr;
+        lista* newEnd = nullptr;
+
+        this->sljedeci = quickSortRec(this->sljedeci, getTail(this->sljedeci));
+    }
+
 };
-lista *objekt=new lista;
+lista *objekt=new lista();
 int main(){
     int n;
     cout << "Unesite broj elemenata: ";
@@ -61,6 +138,7 @@ int main(){
         cin >> l;
         objekt->dodaj(l);
     }
+    objekt->quickSort();
     int k;
     cout << "Unesite broj ciji ce se visekratnici izbrisati: ";
     cin >> k;
