@@ -9,5 +9,8 @@ int main(){
         cout << "Unesite " << i+1 << ". broj: ";
         cin >> polje[i];
     }
+    for(int i=0;i<N;i++){
+        cout << polje[i] << " ";
+    }
     return 0;
 }
