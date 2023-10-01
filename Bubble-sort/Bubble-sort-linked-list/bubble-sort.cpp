@@ -28,6 +28,27 @@ class lista{
         }
     }
 
+    void sortiranje(){
+        lista *prethodni, *tekuci, *iduci;
+        int provjera;
+        do{
+            provjera = 0;
+            tekuci = this->sljedeci;
+            prethodni=this;
+            while(tekuci && tekuci->sljedeci){
+                iduci = tekuci->sljedeci;
+                if(tekuci->N > iduci->N){
+                    prethodni->sljedeci=iduci;
+                    tekuci->sljedeci=iduci->sljedeci;
+                    iduci->sljedeci=tekuci;
+                    provjera=1;
+                }
+                prethodni=tekuci;
+                tekuci=tekuci->sljedeci;
+            }
+        }while(provjera==1);
+    }
+
     
 };
 int main(){
@@ -55,6 +76,7 @@ int main(){
                 }while(prov!='N');
                 break;
             case 2:
+            objekt->sortiranje();
                 break;
             case 3:
                 objekt->ispis();
