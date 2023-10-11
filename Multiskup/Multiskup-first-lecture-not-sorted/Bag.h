@@ -8,6 +8,7 @@
 
 #include <cstdlib>
 #include <iostream>
+using namespace std;
 
 template <typename elementtype>
 class bag  {
@@ -39,8 +40,8 @@ class bag  {
 
     void Insert(elementtype x) {
          if (NoEl == MAXB) {
-            std::cout << "multiskup je prepunjen" 
-                      << std::endl;
+            cout << "multiskup je prepunjen" 
+                      << endl;
             exit(EXIT_FAILURE);
          }
          else 
@@ -61,5 +62,28 @@ class bag  {
     void DeleteAll() {
          NoEl = 0;
     }
+
+    void Union(bag <elementtype > &M,bag <elementtype > &N){
+          if (M.NoEl + N.NoEl > MAXB) {
+               cout << " Multiskupovi su preveliki " << endl;
+               exit( EXIT_FAILURE );
+          }
+          else {
+               int i,j;
+               for (i = 0; i<M.NoEl; i++)
+                    el[i] = M.el[i];
+               for (j = 0; j < N.NoEl; j++)
+                    el[i+j] = N.el[j];
+               NoEl = i+j;
+          }
+
+          cout << endl;
+          cout << "(";
+          for(int i=0;i<NoEl;i++){
+               cout << el[i] << ", ";
+          }
+          cout << ")";
+          cout << endl;
+     }
 };
 
