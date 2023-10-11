@@ -17,7 +17,7 @@ int main(){
     for(int i=0;i<sizeof(N)/sizeof(N[0]);i++){
         bagInstN.Insert(N[i]);
     }
-
+    cout << "Unija je: ";
     bagInstM.Union(bagInstM, bagInstN);
 
     

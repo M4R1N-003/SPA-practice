@@ -12,7 +12,7 @@
 
 #include <cstdlib>
 #include <iostream>
-
+using namespace std;
 template <typename elementtype>
 class bag {
       private:
@@ -98,4 +98,37 @@ class bag {
       void DeleteAll() { 
            NoEl = 0;
 	  }
+
+     void Union(bag <elementtype > &M,bag <elementtype > &N){
+          if (M.NoEl + N.NoEl > MAXB) {
+               cout << " Multiskupovi su preveliki " << endl;
+               exit( EXIT_FAILURE );
+          }
+          else {
+               int i,j;
+               for (i = 0; i<M.NoEl; i++)
+                    el[i] = M.el[i];
+               for (j = 0; j < N.NoEl; j++)
+                    el[i+j] = N.el[j];
+               NoEl = i+j;
+          }
+
+          for(int i=NoEl-1;i>=0;i--){
+            for(int j=0;j<i;j++){
+                  if(el[j]>el[i]){
+                     int temp = el[j];
+                     el[j]=el[i];
+                     el[i]=temp;
+                  }
+            }
+         }
+
+          cout << "(";
+          for(int i=0;i<NoEl;i++){
+               cout << el[i] << ", ";
+          }
+          cout << ")";
+          cout << endl;
+     }
+
 };

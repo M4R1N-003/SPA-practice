@@ -77,7 +77,6 @@ class bag  {
                NoEl = i+j;
           }
 
-          cout << endl;
           cout << "(";
           for(int i=0;i<NoEl;i++){
                cout << el[i] << ", ";
