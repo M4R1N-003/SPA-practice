@@ -84,5 +84,38 @@ class bag  {
           cout << ")";
           cout << endl;
      }
+
+     void Intersect(bag<elementtype> &M, bag<elementtype> &N) {
+          bag<elementtype> temp;
+          bag<elementtype> priv;
+          for(int i=0;i<N.NoEl;i++){
+               priv.Insert(N.el[i]);
+          }
+          for (int i = 0; i < M.NoEl; i++) {
+               if (N.IsElement(M.el[i])) {
+                    temp.Insert(M.el[i]);
+                    N.Delete(M.el[i]);
+               }
+          }
+
+          cout << "(";
+          for (int i = 0; i < temp.NoEl; i++) {
+               cout << temp.el[i] << ", ";
+          }
+          cout << ")";
+          cout << endl;
+
+          for(int i=0;i<N.NoEl;i++){
+               N.Delete(N.el[i]);
+          }
+
+          for(int i=0;i<priv.NoEl;i++){
+               N.Insert(priv.el[i]);
+          }
+
+
+     }
+
+
 };
 

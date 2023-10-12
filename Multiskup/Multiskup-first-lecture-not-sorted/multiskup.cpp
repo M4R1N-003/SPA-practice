@@ -19,6 +19,8 @@ int main(){
     }
     cout << "Unija je: ";
     bagInstM.Union(bagInstM, bagInstN);
+    cout << "Presjek je: ";
+    bagInstM.Intersect(bagInstM, bagInstN);
 
     
 
