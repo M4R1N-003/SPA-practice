@@ -131,4 +131,32 @@ class bag {
           cout << endl;
      }
 
+     void Intersect(bag<elementtype> &M, bag<elementtype> &N) {
+          bag<elementtype> temp;
+
+          int i = 0; 
+          int j = 0;
+
+          while (i < M.NoEl && j < N.NoEl) {
+               if (M.el[i] == N.el[j]) {
+                    temp.Insert(M.el[i]);
+                    i++;
+                    j++; 
+               } 
+               else if (M.el[i] < N.el[j]) {
+                    i++; 
+               } 
+               else {
+                    j++; 
+               }
+          }
+
+          cout << "(";
+          for (int k = 0; k < temp.NoEl-1; k++) {
+               cout << temp.el[k] << ", ";
+          }
+          cout << ")";
+          cout << endl;
+          }
+
 };

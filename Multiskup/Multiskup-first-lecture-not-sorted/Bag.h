@@ -99,7 +99,7 @@ class bag  {
           }
 
           cout << "(";
-          for (int i = 0; i < temp.NoEl; i++) {
+          for (int i = 0; i < temp.NoEl-1; i++) {
                cout << temp.el[i] << ", ";
           }
           cout << ")";
