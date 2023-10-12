@@ -21,9 +21,8 @@ int main(){
     bagInstM.Union(bagInstM, bagInstN);
     cout << "Presjek je: ";
     bagInstM.Intersect(bagInstM, bagInstN);
-
-    
-
+    cout << "Razlika je: ";
+    bagInstM.Subtract(bagInstM, bagInstN);
     
     return 0;
 }
