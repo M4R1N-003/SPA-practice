@@ -157,6 +157,36 @@ class bag {
           }
           cout << ")";
           cout << endl;
+     }
+     
+     void Subtract(bag<elementtype> &M, bag<elementtype> &N){
+          bag <elementtype> priv;
+
+          for(int i=0;i<M.NoEl;i++){
+               priv.el[i]=M.el[i];
           }
+          int brojac=M.NoEl-N.NoEl;
+          for(int i=0;i<M.NoEl;i++){
+               if(N.IsElement(M.el[i])){
+                         M.Delete(M.el[i]);
+               }
+          }
+
+          cout << "(";
+          for(int i=0;i<=(M.NoEl-N.NoEl)+1;i++){
+               cout << M.el[i] << ", ";
+          }
+          cout << ")"<< endl;
+
+          for(int i=0;i<M.NoEl;i++){
+               M.Delete(M.el[i]);
+          }
+
+          for(int i=0;i<priv.NoEl;i++){
+               M.el[i]=priv.el[i];
+          }
+
+
+     }
 
 };
