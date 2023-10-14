@@ -151,6 +151,49 @@ class bag  {
 
      }
 
+     void Subtract1(bag <elementtype> &M, bag <elementtype> &N){
+          bag <int> privM;
+          bag <int> privN;
+
+          for(int i=0;i<M.NoEl;i++){
+               privM.Insert(M.el[i]);
+          }
+          for(int i=0;i<N.NoEl;i++){
+               privN.Insert(N.el[i]);
+          }
+
+          for(int i=0;i<M.NoEl;i++){
+               if(N.IsElement(M.el[i])){
+                    N.Delete(M.el[i]);
+                    M.Delete(M.el[i]);
+               }
+          }
+          
+          cout << "(";
+          for(int i=0;i<M.NoEl;i++){
+               cout << M.el[i] << ", ";
+          }
+          cout << ")";
+          cout << endl;
+
+          for(int i=0;i<M.NoEl;i++){
+               M.Delete(M.el[i]);
+          }
+
+          for(int i=0;i<N.NoEl;i++){
+               N.Delete(N.el[i]);
+          }
+
+          for(int i=0;i<privM.NoEl;i++){
+               M.Insert(privM.el[i]);
+          }
+
+          for(int i=0;i<privN.NoEl;i++){
+               N.Insert(privN.el[i]);
+          }
+
+     }
+
      
 
 

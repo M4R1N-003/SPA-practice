@@ -23,6 +23,9 @@ int main(){
     bagInstM.Intersect(bagInstM, bagInstN);
     cout << "Razlika je: ";
     bagInstM.Subtract(bagInstM, bagInstN);
+
+    cout << "Razlika 2 je: ";
+    bagInstM.Subtract1(bagInstM, bagInstN);
     
     return 0;
 }
