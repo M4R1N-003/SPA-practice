@@ -19,10 +19,22 @@ void BubbleSort (T a[], int n) {
 
 template <typename T>
 void ExchangeSort (T a[], int n) {
+	
+	for(int i=n-1;i>=0;i--){
+		for(int j=0;j<i;j++){
+			if(a[j]>a[i]){
+				int temp = a[j];
+				a[j]=a[i];
+				a[i]=temp;
+			}
+		}
+	}
 }
 
 template <typename T>
 void SelectionSort (T a[], int n) {
+
+
 }
 
 template <typename T>
