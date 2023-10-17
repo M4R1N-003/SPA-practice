@@ -19,7 +19,7 @@ void BubbleSort (T a[], int n) {
 
 template <typename T>
 void ExchangeSort (T a[], int n) {
-	
+
 	for(int i=n-1;i>=0;i--){
 		for(int j=0;j<i;j++){
 			if(a[j]>a[i]){
@@ -33,12 +33,34 @@ void ExchangeSort (T a[], int n) {
 
 template <typename T>
 void SelectionSort (T a[], int n) {
+	for(int i=n-1;i>0;i--){
 
+		int max = 0;
+		for(int j=0;j<=i;j++){
+			if(a[j] > a[max])
+				max=j;
+		}
+
+		if(max==i) continue;
+
+		std::swap(a[i],a[max]);
+	}
 
 }
 
 template <typename T>
 void InsertionSort (T a[], int n) {
+
+	for(int i=1;i<n;i++){
+        int j=i-1;
+        int pom = a[i];
+        while(j>=0 && a[j]>pom){
+            a[j+1] = a[j];
+            j--;
+        }
+        a[j+1] = pom;
+    }
+
 }
 
 template <typename T>
