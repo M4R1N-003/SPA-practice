@@ -63,9 +63,49 @@ void InsertionSort (T a[], int n) {
 
 }
 
-template <typename T>
-void MergeSort (T a[], int n) {
-}
+void merge1(int *a, int *b, int prvi, int pivot, int zadnji) {
+            int h, i, j, k;
+            h = prvi;
+            i = prvi;
+            j = pivot + 1;
+			
+        while ((h <= pivot) && (j <= zadnji)) {
+            if (a[h] <= a[j]) {
+                b[i] = a[h];
+                h++;
+            } 
+            else {
+                b[i] = a[j];
+                j++;
+            }
+            i++;
+        }
+
+        if (h > pivot) {
+            for (k = j; k <= zadnji; k++) {
+            b[i] = a[k];
+            i++;
+            }
+        } 
+        else {
+            for (k = h; k <= pivot; k++) {
+            b[i] = a[k];
+            i++;
+            }
+        }
+    for (k = prvi; k <= zadnji; k++) a[k] = b[k];
+    }
+
+ template <typename T>
+    void MergeSort(T a[], int *b, int prvi, int zadnji) {
+    int pivot;
+    if (prvi < zadnji) {
+        pivot = (prvi + zadnji) / 2;
+        MergeSort(a, b, prvi, pivot);
+        MergeSort(a, b, pivot + 1, zadnji);
+        merge1(a, b, prvi, pivot, zadnji);
+    }
+    }
 
 
 int main () {
@@ -85,6 +125,7 @@ int main () {
 	std::cout << "Broj elemenata polja: ";
 	std::cin >> n;
 	int *a = new int [n];
+	int *b = new int[n];
 	for (int i = 0; i < n; i++)
 	    a[i] = test==1?rand():rand()*rand();
 	switch (test) {
@@ -106,7 +147,7 @@ int main () {
 						          t = clock() - bt;
 						          break;
 						  case 5: bt = clock();
-						          MergeSort(a,n);
+						          MergeSort(a,b,0,n-1);
 						          t = clock() - bt;
 						          break;
 						  default: std::cout << "Pogresan algoritam" << std::endl;
@@ -122,7 +163,8 @@ int main () {
 	      	                     break;
 	      	             case 4: InsertionSort(a,n);
 	      	                     break;
-	      	             case 5: MergeSort(a,n);
+	      	             case 5: 
+						 		MergeSort(a,b,0,n-1);
 	      	                     break;
 						 default: std::cout << "Pogresan algoritam" << std::endl;
 		          }
