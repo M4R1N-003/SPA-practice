@@ -1,45 +1,98 @@
 #include <iostream>
 #include <ctime>
-#include <stdlib.h>
+#include <cstdlib>
 using namespace std;
 
-class lista{
-    private:
-    lista *sljedeci;
-    public:
-    int N;
+class lista {
+private:
+    lista* sljedeci;
+    lista* prethodni;
+public:
+    int n;
+    int brojac = 0;
 
-    void dodavanje(int x){
-        lista *novi, *zadnji=this;
-        while(zadnji->sljedeci)
-            zadnji=zadnji->sljedeci;
+    lista() {
+        sljedeci = NULL;
+        prethodni = NULL;
+    }
+
+    void unos(int x) {
+        lista* novi, * zadnji = this;
+        while (zadnji->sljedeci)
+            zadnji = zadnji->sljedeci;
         novi = new lista();
-        zadnji->sljedeci=novi;
-        novi->sljedeci=NULL;
-        novi->N=x;
+        zadnji->sljedeci = novi;
+        novi->n = x;
+        novi->sljedeci = NULL;
+        novi->prethodni = zadnji;
+        
     }
 
-    void ispis(){
-        lista *tekuci=this->sljedeci;
-        while(tekuci){
-            cout << tekuci->N << " ";
-            tekuci=tekuci->sljedeci;
+    void ispis() {
+        lista* tekuci = this->sljedeci;
+        while (tekuci) {
+            cout << tekuci->n << " ";
+            tekuci = tekuci->sljedeci;
         }
+        cout << endl;
     }
 
-    void sortiranje(){
+    void dvosmjernoMjehurastoSortiranje() {
+        lista* pocetak = this->sljedeci;
+        lista* kraj = NULL;
+        bool zamijenjeno;
 
+        do {
+            zamijenjeno = false;
+            lista* trenutni = pocetak;
+
+            while (trenutni->sljedeci != kraj) {
+                if (trenutni->n > trenutni->sljedeci->n) {
+                    int temp = trenutni->n;
+                    trenutni->n = trenutni->sljedeci->n;
+                    trenutni->sljedeci->n = temp;
+                    zamijenjeno = true;
+                }
+                trenutni = trenutni->sljedeci;
+            }
+
+            if (!zamijenjeno) break; // Ako nema zamjena, sortiranje je završeno
+
+            kraj = trenutni;
+            trenutni = trenutni->prethodni;
+
+            while (trenutni != pocetak) {
+                if (trenutni->n < trenutni->prethodni->n) {
+                    int temp = trenutni->n;
+                    trenutni->n = trenutni->prethodni->n;
+                    trenutni->prethodni->n = temp;
+                    zamijenjeno = true;
+                }
+                trenutni = trenutni->prethodni;
+            }
+
+        } while (zamijenjeno);
     }
 };
-int main(){
-    lista *objekt = new lista();
+
+int main() {
     int n;
+    lista* objekt = new lista;
+    cout << "Unesite broj brojeva: ";
     cin >> n;
     srand(time(0));
-    for(int i=0;i<n;i++){
-        int s=rand()%20;
-        objekt->dodavanje(s);
+    for (int i = 0; i < n; i++) {
+        int s = rand() % 100;
+        objekt->unos(s);
     }
+
+    cout << "Nesortirana lista: ";
+    objekt->ispis();
+    cout << endl;
+
+    objekt->dvosmjernoMjehurastoSortiranje(); // Sortiranje
+
+    cout << "Sortirana lista: ";
     objekt->ispis();
 
     return 0;
