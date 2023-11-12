@@ -4,8 +4,10 @@
 using namespace std;
 
 class lista {
-public:
+private:
     lista* sljedeci;
+
+public:
     int N;
 
     lista() {
@@ -28,76 +30,93 @@ public:
             cout << tekuci->N << " ";
             tekuci = tekuci->sljedeci;
         }
-        cout << endl;
     }
 
-    lista* partition(lista* low, lista* high) {
-        int pivot = high->N;
-        lista* i = low;
-        for (lista* j = low; j != high; j = j->sljedeci) {
-            if (j->N <= pivot) {
-                swap(i->N, j->N);
-                i = i->sljedeci;
+    lista* getTail(lista* current) {
+        while (current != nullptr && current->sljedeci != nullptr) {
+            current = current->sljedeci;
+        }
+        return current;
+    }
+
+    lista* partition(lista* head, lista* end, lista** newHead, lista** newEnd) {
+        lista* pivot = end;
+        lista* prev = nullptr, * cur = head, * tail = pivot;
+
+        while (cur != pivot) {
+            if (cur->N < pivot->N) {
+                if ((*newHead) == nullptr) {
+                    (*newHead) = cur;
+                }
+                prev = cur;
+                cur = cur->sljedeci;
+            } else {
+                if (prev) {
+                    prev->sljedeci = cur->sljedeci;
+                }
+                lista* tmp = cur->sljedeci;
+                cur->sljedeci = nullptr;
+                tail->sljedeci = cur;
+                tail = cur;
+                cur = tmp;
             }
         }
-        swap(i->N, high->N);
-        return i;
-    }
 
-    lista* getTail(lista* node) {
-        while (node != nullptr && node->sljedeci != nullptr) {
-            node = node->sljedeci;
+        if ((*newHead) == nullptr) {
+            (*newHead) = pivot;
         }
-        return node;
+
+        (*newEnd) = tail;
+
+        return pivot;
     }
 
-    lista* partition_r(lista* low, lista* high) {
-        srand(time(nullptr));
-        int random = rand() % (high->N - low->N + 1);
-        lista* pivot = low;
-        for (int i = 0; i < random; i++) {
-            pivot = pivot->sljedeci;
+    lista* quickSortRec(lista* head, lista* end) {
+        if (!head || head == end) {
+            return head;
         }
-        swap(pivot->N, high->N);
-        return partition(low, high);
-    }
 
-    void quicksort(lista* low, lista* high) {
-        if (low != nullptr && low != high && low->sljedeci != high) {
-            lista* p = partition_r(low, high);
-            quicksort(low, p);
-            quicksort(p->sljedeci, high);
+        lista* newHead = nullptr, * newEnd = nullptr;
+
+        lista* pivot = partition(head, end, &newHead, &newEnd);
+
+        if (newHead != pivot) {
+            lista* tmp = newHead;
+            while (tmp->sljedeci != pivot) {
+                tmp = tmp->sljedeci;
+            }
+            tmp->sljedeci = nullptr;
+
+            newHead = quickSortRec(newHead, tmp);
+
+            tmp = getTail(newHead);
+            tmp->sljedeci = pivot;
         }
+
+        pivot->sljedeci = quickSortRec(pivot->sljedeci, newEnd);
+
+        return newHead;
     }
 
-    void sort() {
-        lista* tail = getTail(this);
-        quicksort(this->sljedeci, tail);
+    void quickSort() {
+        lista* newHead = nullptr;
+        lista* newEnd = nullptr;
+
+        this->sljedeci = quickSortRec(this->sljedeci, getTail(this->sljedeci));
     }
 };
 
+lista* objekt = new lista();
 int main() {
-    srand(time(nullptr));
-
     int n;
     cout << "Unesite broj elemenata: ";
     cin >> n;
     int l;
-    lista* objekt = new lista();
     for (int i = 0; i < n; i++) {
         cin >> l;
         objekt->dodaj(l);
     }
-
-    cout << "Nesortirana lista: ";
+    objekt->quickSort();
     objekt->ispisi();
-
-    objekt->sort();
-
-    cout << "Sortirana lista: ";
-    objekt->ispisi();
-
-    delete objekt;
-
     return 0;
 }
