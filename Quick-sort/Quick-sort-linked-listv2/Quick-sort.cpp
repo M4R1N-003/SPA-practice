@@ -83,7 +83,7 @@ int main() {
     cout << "Unesite broj elemenata: ";
     cin >> n;
     int l;
-    lista* objekt = new lista(); // Initialize without creating the dummy head node
+    lista* objekt = new lista();
     for (int i = 0; i < n; i++) {
         cin >> l;
         objekt->dodaj(l);
