@@ -1,90 +1,55 @@
 #include <iostream>
 #include <cstdlib>
-#include <ctime>
 #include "listp.h"
-
+#include <time.h>
 using namespace std;
 
-void brisanjeJedinstvene(list<int> &L) {
-    list<int>::element el1, el2;
-    el1 = L.First();
-    while (el1 != L.End()) {
-        bool provjera = false;
-        el2 = L.Next(el1);
-        while (el2 != L.End()) {
-            if (L.Retrieve(el1) == L.Retrieve(el2)) {
-                provjera = true;
-                break;
+void brisanje(list<int>& br) {
+    list<int>::element e;
+
+    for (e = br.Previous(br.End()); e != br.lambda; e = br.Previous(e)) {
+        int b = br.Retrieve(e) - 1;
+        list<int>::element iter = br.First();
+
+        // Provjeri pojavljivanje u ostatku liste
+        while (iter != e) {
+            if (br.Retrieve(iter) == br.Retrieve(e)) {
+                break;  // Ako se element ponovno pojavljuje, prekini petlju
             }
-            el2 = L.Next(el2);
+            iter = br.Next(iter);
         }
-        if (!provjera) {
-            L.Delete(el1);
-            el1 = L.Next(L.First());
-        } else {
-            el1 = L.Next(el1);
+
+        if (iter == e) {
+            // Element se ne pojavljuje ponovno
+            br.Delete(e);
         }
     }
 }
-
-void funkcija(list<int> &L) {
-    list<int>::element current = L.First();
-
-    while (current != L.End()) {
-        int currentElement = L.Retrieve(current);
-        list<int>::element nextElement = L.Next(current);
-
-        // Flag to check if any duplicates are found
-        bool foundDuplicate = false;
-
-        // Compare the current element with the elements that come after it
-        while (nextElement != L.End()) {
-            if (currentElement == L.Retrieve(nextElement)) {
-                // Duplicate element found, set the flag and break the inner loop
-                foundDuplicate = true;
-                break;
-            }
-            nextElement = L.Next(nextElement);
-        }
-
-        // If a duplicate is found, delete the current element
-        if (foundDuplicate) {
-            list<int>::element toDelete = current;
-            current = L.Next(current);  // Move to the next element before deleting
-            L.Delete(toDelete);
-        } else {
-            // Move to the next element
-            current = L.Next(current);
-        }
-    }
-}
-
 
 int main() {
-    srand(time(0));
+    srand(time(NULL));
+    list<int> br;
+    list<int>::element e;
+
     int n;
-    cout << "unesite broj nasumicnih brojeva: ";
+    cout << "Unesite n brojeva: ";
     cin >> n;
 
-    list<int> L;
+    e = br.First();
     for (int i = 0; i < n; i++) {
-        int a = rand() % 21;
-        L.Insert(L.End(), a);
-    }
-
-    cout << "Originalni niz: ";
-    for (list<int>::element el2 = L.First(); el2 != L.End(); el2 = L.Next(el2)) {
-        cout << L.Retrieve(el2) << " ";
+        int b = 1 + rand() % 20;
+        br.Insert(e, b);
+        cout << b << " ";
     }
     cout << endl;
 
-    brisanjeJedinstvene(L);
-    funkcija(L);
+    brisanje(br);
 
-    cout << "Niz nakon brisanja jedinstvenih i duplikatnih elemenata: ";
-    for (list<int>::element el3 = L.First(); el3 != L.End(); el3 = L.Next(el3)) {
-        cout << L.Retrieve(el3) << " ";
+    for (e = br.First(); e != br.End(); e = br.Next(e)) {
+        cout << br.Retrieve(e) << " ";
     }
+
+    cout << endl;
 
     return 0;
 }
