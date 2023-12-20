@@ -1,50 +1,79 @@
 #include <iostream>
-#include <cstring>
-#include <cmath>
 #include "stackp.h"
 using namespace std;
-double racunaj(char op, double a, double b){
-	switch(op){
-		case '+': return a+b;
-		case '-': return a-b;
-		case '*': return a*b;
-		case '/': return a/b;
-		case '^': return pow(a,b);
-	}
+
+int count = 0;
+stack<double> brojStog;
+stack<char> operacijaStog;
+stack<double> tempBrojStog;
+stack<char> tempOperacijaStog;
+
+void razvrstaj(){
+    while (!brojStog.IsEmpty()) {
+        int x = brojStog.Top();
+        brojStog.Pop();
+        tempBrojStog.Push(x);
+    }
+    while (!operacijaStog.IsEmpty()) {
+        char x = operacijaStog.Top();
+        operacijaStog.Pop();
+        tempOperacijaStog.Push(x);
+        count++;
+    }
 }
-double eval(char in[],double x){
-	stack <double> S;
-	int L=strlen(in);
-	double a,b;
-	for(int i=0;i<L;i++){
-		switch(in[i]){
-			case '+':
-			case '-':
-			case '*':
-			case '/':
-			case '^':
-				b=S.Top();
-				S.Pop();
-				a=S.Top();
-				S.Pop();
-				S.Push(racunaj(in[i],a,b));
-				break;
-			case 'x':
-				S.Push(x);
-				break;
-			default: 
-				S.Push(in[i]-48);
-		}
-	}
-	cout<<S.Top()<<endl;
-	return S.Top();
+
+void unosFunkcija(char unos[]){
+	int trenutniBroj = 0;
+    bool citanjeBroja = false;
+    for (int i = 0; unos[i] != '\0'; i++) {
+        if (unos[i] >= '0' && unos[i] <= '9') {
+            trenutniBroj = trenutniBroj * 10 + (unos[i] - '0');
+            citanjeBroja = true;
+        } 
+		else {
+            if (citanjeBroja) {
+                brojStog.Push(trenutniBroj);
+                trenutniBroj = 0;
+                citanjeBroja = false;
+            }
+
+            if (unos[i] == '+' || unos[i] == '-' || unos[i] == '*' || unos[i] == '/') {
+                operacijaStog.Push(unos[i]);
+            } 
+        }
+    }
+    if (citanjeBroja) {
+        brojStog.Push(trenutniBroj);
+    }
 }
-int main(){
-	char in[100];
-	cin.getline(in,100);
-	double  x;
-	cin>>x;
-	
-	eval(in,x);
-	return 0;
+
+int undo(int n){
+	razvrstaj();
+	int trenutniBroj = tempBrojStog.Top();
+    tempBrojStog.Pop();
+    for(int i=0; i<count-n; i++){
+    	double broj = tempBrojStog.Top();
+    	tempBrojStog.Pop();
+    	switch (tempOperacijaStog.Top()) {
+        	case '+': trenutniBroj += broj; break;
+        	case '-': trenutniBroj -= broj; break;
+        	case '*': trenutniBroj *= broj; break;
+        	case '/': trenutniBroj /= broj; break;
+    	}
+    	tempOperacijaStog.Pop();
+    }
+    return trenutniBroj;
+}
+
+int main() {
+	cout<<"Unos izraza: ";
+    char unos[256];
+    cin.getline(unos, 256);
+    unosFunkcija(unos);
+    
+    cout<<"undo: ";
+    int n;
+    cin>>n;
+	cout<<endl<<undo(n);
+    return 0;
 }
