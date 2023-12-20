@@ -34,20 +34,17 @@ void merge(int arr[], int left_start, int mid, int right_end) {
 }
 
 void mergeSort(int arr[], int n) {
-    stack<int> st;
-    int curr_size;
-    int left_start;
-
-    for (curr_size = 1; curr_size <= n - 1; curr_size *= 2) {
-        for (left_start = 0; left_start < n - 1; left_start += 2 * curr_size) {
-            int mid = left_start + curr_size - 1;
+    for (int curr_size = 1; curr_size <= n - 1; curr_size *= 2) {
+        for (int left_start = 0; left_start < n - 1; left_start += 2 * curr_size) {
+            int mid = min(left_start + curr_size - 1, n - 1);
             int right_end = min(left_start + 2 * curr_size - 1, n - 1);
             merge(arr, left_start, mid, right_end);
         }
     }
 }
 
-int main() {        
+
+int main() {
     int n;
     cout << "Unesite broj elemenata niza: ";
     cin >> n;
