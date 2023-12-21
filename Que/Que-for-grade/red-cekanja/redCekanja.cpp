@@ -1,6 +1,8 @@
 #include "queuep.h"
 using namespace std;
 int main(){
+	int sklj;
+	cin >> sklj;
 	queue <int> Q;
 	int trajanje,pocetak=0,pom=0,x,n,zbroj=0;
 	float prosjek;
