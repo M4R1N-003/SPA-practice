@@ -4,9 +4,6 @@
 using namespace std;
 
 int main(){
-	if(-1){
-		cout << "a";
-	}
 	stack<char> S;
 	
 	string izraz;
