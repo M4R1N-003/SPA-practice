@@ -1,5 +1,5 @@
 # SPA-practice
-Welcome to the official repository for the Single Page Applications (SPA) class at our faculty. This repository serves as a centralized hub for all the code and programs related to the SPA course. Feel free to explore and utilize the resources provided here to enhance your learning experience.
+Welcome to the official repository for the "Strukture podataka i algoritmi".(SPA) class at our faculty. This repository serves as a centralized hub for all the code and programs related to the SPA course. Feel free to explore and utilize the resources provided here to enhance your learning experience.
 
 <img src= "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/1200px-ISO_C%2B%2B_Logo.svg.png" width = "100" height="100">
 
